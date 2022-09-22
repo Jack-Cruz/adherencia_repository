@@ -1,0 +1,67 @@
+Docker commands:
+* cd '.\Documents\TDP Decision Forest\'
+* docker run --rm -p 8501:8501 -v "$TESTDATA/saved_model_half_plus_two_cpu:/models/half_plus_two" -e MODEL_NAME=half_plus_two -t tensorflow/serving
+* docker run -p 8501:8501 --mount type=bind,source="C:\Users\jack\Documents\TDP Decision Forest\serving\tensorflow_serving\servables\tensorflow\testdata\saved_model_half_plus_two_cpu",target=/models/half_plus_two -e MODEL_NAME=half_plus_two -t tensorflow/serving
+
+
+Command prompt:
+* docker container ls -a
+* docker stop [ID]
+* docker rm [ID]
+* netstat -ab
+* python sending_request.py
+
+Python libraries:
+* pip3 install requests
+
+WSL commands:
+* wsl --list --verbose
+* sudo apt update && sudo apt upgrade
+* sudo apt install git
+* sudo apt install python3-pip
+
+Docker commands:
+* sudo apt-get remove docker docker-engine docker.io containerd runc
+* sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+Pattern:
+* unset DOCKER_HOST
+* git clone https://github.com/tensorflow/serving.git
+* docker run -it -v ${PWD}/..:/working_dir -w /working_dir/serving tensorflow/serving:nightly-devel bash
+* bazel build //tensorflow_serving/model_servers:tensorflow_model_server
+* commando: chmod +x ${TFSERVING} --rest_api_port=8501 --model_name=${MODEL_NAME} --model_base_path=${MODEL_PATH}
+
+Tutoriales:
+* Tutorial de sarvex: https://github.com/sarvex/tensorflow-decision-forests/blob/main/documentation/tensorflow_serving.md
+* Tutorial de Pieter: https://blog.ml6.eu/serving-decision-forests-with-tensorflow-b447ea4fc81c
+* Tutorial tensorflow (principal): https://www.tensorflow.org/decision_forests/tensorflow_serving
+* Github TF-DF + TF Serving: https://github.com/tensorflow/decision-forests/tree/main/tools/tf_serving (Se intento construir binarios -> error.JAVA.IO.EXCEPTION, y descargar binarios en linux -> no reconoce el comando)
+* WSL Linux commands in windows: https://www.ionos.com/digitalguide/server/know-how/windows-subsystem-for-linux-wsl/#:~:text=The%20Windows%20Subsystem%20for%20Linux%20is%20a%20compatibility,in%20the%20standard%20Executable%20and%20Linkable%20Format%20%28ELF%29.
+* Accessing files in WSL: https://www.howtogeek.com/426749/how-to-access-your-linux-wsl-files-in-windows-10/#:~:text=You%20can%20also%20access%20them%20directly%20at%20a,Ubuntu%2018.04%20usually%20is%20available%20at%20%5Cwsl%24Ubuntu-18.04%20.
+* TF Serving Docker: https://www.tensorflow.org/tfx/serving/docker
+* WSL docker: https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers
+* Install Tensorflow-model-server: https://stackoverflow.com/questions/59147405/tensorflow-model-server-command-not-found
+* Docker daemont not found: https://stackoverflow.com/questions/60708229/wsl2-cannot-connect-to-the-docker-daemon
+* How to kill a process (KID): https://phoenixnap.com/kb/how-to-kill-a-process-in-linux#:~:text=1%20Key%20Takeaways%20on%20Terminating%20a%20Linux%20Process,the%20killall%2C%20pkill%2C%20kill%2C%20xkill%20or%20top%20commands.
+* How to transfer files (AWS): https://docs.aws.amazon.com/managedservices/latest/appguide/qs-file-transfer.html
+* How to connect through WinSCP: https://protocoderspoint.com/how-to-connect-to-aws-server-instance-ec2-using-winscp/
+
+Notas:
+* The TensorFlow Decision Forests (TF-DF) library uses custom TensorFlow Ops for inference
+* Hay dos formas de ejecutar Tensorflow serving + Tensorflow Decision Forest:
+- Imágen de docker (crear, o descargar)
+- Compilando y ejecutando archivos binarios
+
+Commandos oficiales:
+* python3 TDP_decision_forest/training.py: Comando para entrenar el algorítmo
+* Comandos para pre-run del modelo
+> mkdir -p ./tmp/adherencia_with_version
+> cp -r ./tmp/adherencia ./tmp/adherencia_with_version/1
+> TFSERVING="./tensorflow_model_server"
+> MODEL_PATH=/home/yefri123/tmp/adherencia_with_version
+> MODEL_NAME=adherencia
+> ${TFSERVING} --rest_api_port=8501 --model_name=${MODEL_NAME} --model_base_path=${MODEL_PATH}
+> curl http://localhost:8501/v1/models/${MODEL_NAME}:predict -X POST \
+    -d '{"instances": [{"age":39,"workclass":"State-gov","fnlwgt":77516,"education":"Bachelors","education_num":13,"marital_status":"Never-married","occupation":"Adm-clerical","relationship":"Not-in-family","race":"White","sex":"Male","capital_gain":2174,"capital_loss":0,"hours_per_week":40,"native_country":"United-States"}]}'
+
+> education, medication_preparation_by, occupation, sams_item1, sams_item10, sams_item11, sams_item12, sams_item13, sams_item14, sams_item15, sams_item16, sams_item17, sams_item18, sams_item19, sams_item2, sams_item3, sams_item4, sams_item5, sams_item6, sams_item7, sams_item8, sams_item9

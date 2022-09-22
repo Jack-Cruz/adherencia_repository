@@ -2,7 +2,7 @@ import json
 import requests
 
 print('Making single prediction')
-host = 'localhost'
+host = '3.15.215.127'
 port = '8501'
 data = {'age': [72],
     'sex': ['female'],
@@ -34,8 +34,9 @@ data = {'age': [72],
 
 json = {"inputs": data}
 if __name__ == '__main__':
-    server_url = 'http://' + host + ':' + port + '/v1/models/adherencia:predict'
+    server_url = 'http://' + host + ':' + port + '/v1/models/adherencia_model:predict'
     response = requests.post(server_url, json=json)
     data = response.json()
     value = data['outputs'][0][0]
     print('Adherencia' if value > 0.80 else 'No adherencia')
+    print('value output:', value)
