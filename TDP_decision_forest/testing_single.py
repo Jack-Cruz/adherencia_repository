@@ -2,7 +2,7 @@ import json
 import requests
 
 print('Making single prediction')
-host = '3.15.215.127'
+host = '18.118.99.240'
 port = '8501'
 data = {'age': [72],
     'sex': ['female'],

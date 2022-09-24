@@ -3,16 +3,16 @@ import pandas as pd
 import tensorflow as tf
 import tensorflow_decision_forests as tfdf
 
-train_df = pd.read_csv("https://github.com/joao-arroyo/Datos/blob/144512fcd29a05f0c789cf596250182f3c2cf165/Research_data_SAMS-test2-ok-training.csv?raw=true")
-test_df = pd.read_csv("https://github.com/joao-arroyo/Datos/blob/144512fcd29a05f0c789cf596250182f3c2cf165/Research_data_SAMS-test2-ok-test.csv?raw=true")
+train_df = pd.read_csv("https://github.com/joao-arroyo/Datos/blob/434950ffbee0190ebb5ea8ab8b68bedf9448299e/DATA_TRAIN2.csv?raw=true")
+test_df = pd.read_csv("https://github.com/joao-arroyo/Datos/blob/434950ffbee0190ebb5ea8ab8b68bedf9448299e/DATA_TEST2.csv?raw=true")
 
-X = train_df.iloc[:, 0:26]
-Y = train_df.iloc[:, 28]
+X = train_df.iloc[:, 0:14]
+Y = train_df.iloc[:, 17]
 train_df = X
 train_df["result"] = Y
 
-X = test_df.iloc[:, 0:26]
-Y = test_df.iloc[:, 28]
+X = test_df.iloc[:, 0:14]
+Y = test_df.iloc[:, 17]
 y_test = Y
 test_df = X
 test_df["result"] = Y
